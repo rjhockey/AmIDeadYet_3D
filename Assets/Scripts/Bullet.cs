@@ -12,4 +12,4 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
         _gun.AddToPool(this);
     }
-}
+} //nothing
