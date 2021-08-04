@@ -12,8 +12,8 @@ public class Gun : MonoBehaviour
     float _nextShootTime;
     Vector3 _direction;
     Queue<Bullet> _pool = new Queue<Bullet>();
-    
 
+   
     // Update is called once per frame
     void Update()
     {
@@ -53,12 +53,17 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            //var bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
-            //bullet.SetGun(this);
-            //return bullet;
-            var bullet = _pool.Dequeue();
-            bullet.gameObject.SetActive(true);
+
+            //instantiate and load GameObject
+            GameObject tempbullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
+            //Get Bullet from Loaded GameObject
+            Bullet bullet = tempbullet.GetComponent<Bullet>();
+
+            bullet.SetGun(this);
             return bullet;
+            //var bullet = _pool.Dequeue();
+            //bullet.gameObject.SetActive(true);
+            //return bullet;
         }
     }
 
