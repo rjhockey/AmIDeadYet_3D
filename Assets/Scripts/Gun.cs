@@ -53,7 +53,6 @@ public class Gun : MonoBehaviour
         }
         else
         {
-
             //instantiate and load GameObject
             GameObject tempbullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation);
             //Get Bullet from Loaded GameObject
@@ -61,9 +60,6 @@ public class Gun : MonoBehaviour
 
             bullet.SetGun(this);
             return bullet;
-            //var bullet = _pool.Dequeue();
-            //bullet.gameObject.SetActive(true);
-            //return bullet;
         }
     }
 

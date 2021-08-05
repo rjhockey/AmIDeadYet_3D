@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
         // get the enemy componet of the enemy we hit
         var enemy = collision.collider.GetComponent<Enemy>();
         if (enemy != null)
-            enemy.TakeDamage();
+            // contacts[0] is the first area hit on enemy, built in array
+            enemy.TakeDamage(collision.contacts[0].point);
     }
 } //nothing
