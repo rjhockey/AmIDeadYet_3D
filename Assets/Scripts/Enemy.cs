@@ -6,9 +6,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
     [SerializeField] int _health = 3;
+    [SerializeField] int _pointValue = 100;
 
     int _currentHealth;
-
+    
     private void OnEnable()
     {
         _currentHealth = _health;
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(_explosionPrefab, impactPoint, transform.rotation);
             gameObject.SetActive(false);
+
+            ScoreSystem.Add(_pointValue);
         }
     }
 }
