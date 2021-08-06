@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] int _health = 3;
     [SerializeField] int _pointValue = 100;
 
+    AudioSource _audioSource;
     int _currentHealth;
     
     private void OnEnable()
     {
+        _audioSource = GetComponent<AudioSource>();
         _currentHealth = _health;
     }
 
@@ -26,6 +29,11 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth--;
         Instantiate(_hitPrefab, impactPoint, transform.rotation);
+        // or write below as _audioSource?.Play();
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
+        }
         
 
         if (_currentHealth <= 0)
@@ -34,6 +42,15 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
 
             ScoreSystem.Add(_pointValue);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var player = collision.collider.GetComponent<Player>();
+        if (player != null)
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
